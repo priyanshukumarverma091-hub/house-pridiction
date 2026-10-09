@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreamhouse Atelier</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+        :root {
+            --purple: #8574ed;
+            --lavender: #eeeaff;
+            --mint: #d9f7ed;
+            --ink: #292d49;
+            --muted: #8589a5;
+            --white: #fffefa;
+            --line: #e8e6f4;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'DM Sans', sans-serif;
+            background: #f7f5ff;
+            color: var(--ink);
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .page {
+            max-width: 1350px;
+            margin: auto;
+            padding: 24px 5%;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 55px;
+        }
+
+        .brand {
+            font: 900 22px 'Nunito', sans-serif;
+            letter-spacing: -1px;
+        }
+
+        .brand span {
+            color: var(--purple);
+        }
+
+        .nav-note {
+            font-size: 12px;
+            color: var(--muted);
+            background: white;
+            border: 1px solid var(--line);
+            padding: 10px 16px;
+            border-radius: 30px;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 55px;
+        }
+
+        .eyebrow {
+            color: #7464d8;
+            font-size: 11px;
+            letter-spacing: 2px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font: 900 clamp(42px, 6vw, 75px)/1.04 'Nunito', sans-serif;
+            letter-spacing: -3px;
+            margin: 18px 0;
+        }
+
+        h1 em {
+            color: var(--purple);
+            font-style: normal;
+        }
+
+        .hero p {
+            max-width: 440px;
+            color: var(--muted);
+            line-height: 1.9;
+            font-size: 15px;
+        }
+
+        .hero-art {
+            min-height: 290px;
+            position: relative;
+            display: grid;
+            place-items: center;
+            background: #eeebff;
+            border-radius: 48% 48% 35% 35%;
+            overflow: hidden;
+        }
+
+        .sun {
+            width: 185px;
+            height: 185px;
+            position: absolute;
+            top: 30px;
+            border-radius: 50%;
+            background: #ffe6b9;
+        }
+
+        .house {
+            position: relative;
+            width: 150px;
+            height: 115px;
+            margin-top: 75px;
+            background: #fffefa;
+            border: 4px solid #454465;
+            border-radius: 8px;
+            box-shadow: 0 12px 0 #d5cef9;
+        }
+
+        .roof {
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            top: -56px;
+            left: 16px;
+            background: #b2a5fa;
+            border-top: 4px solid #454465;
+            border-left: 4px solid #454465;
+            transform: rotate(45deg);
+            border-radius: 8px;
+        }
+
+        .window {
+            position: absolute;
+            width: 28px;
+            height: 30px;
+            top: 17px;
+            background: #b7e9da;
+            border: 3px solid #454465;
+            z-index: 2;
+        }
+
+        .window.left {
+            left: 16px;
+        }
+
+        .window.right {
+            right: 16px;
+        }
+
+        .door {
+            position: absolute;
+            z-index: 3;
+            bottom: 0;
+            left: 57px;
+            width: 32px;
+            height: 54px;
+            background: #8d7cf1;
+            border: 3px solid #454465;
+            border-bottom: 0;
+            border-radius: 16px 16px 0 0;
+        }
+
+        .spark {
+            position: absolute;
+            color: #8473ed;
+            font-size: 28px;
+        }
+
+        .s1 {
+            top: 35px;
+            left: 15%;
+        }
+
+        .s2 {
+            top: 65px;
+            right: 14%;
+        }
+
+        .s3 {
+            bottom: 28px;
+            right: 20%;
+        }
+
+        .art-caption {
+            position: absolute;
+            bottom: 17px;
+            left: 18px;
+            font: 800 12px 'Nunito', sans-serif;
+            background: white;
+            padding: 9px 13px;
+            border-radius: 20px;
+        }
+
+        .workspace {
+            display: grid;
+            grid-template-columns: 1fr .85fr;
+            gap: 22px;
+            align-items: start;
+        }
+
+        .paper {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 25px;
+            padding: clamp(20px, 3vw, 34px);
+            box-shadow: 0 15px 45px #5145a50a;
+        }
+
+        .section-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            gap: 12px;
+            margin-bottom: 26px;
+        }
+
+        h2 {
+            font: 900 25px 'Nunito', sans-serif;
+            margin: 0 0 6px;
+            letter-spacing: -.5px;
+        }
+
+        .sub {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .step {
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            background: var(--lavender);
+            color: #7464d8;
+            font-weight: 900;
+        }
+
+        .fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 19px 14px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .input-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #faf9ff;
+            border: 1px solid #e8e5f8;
+            border-radius: 13px;
+            padding: 0 13px;
+            transition: .2s;
+        }
+
+        .input-wrap:focus-within {
+            border-color: var(--purple);
+            box-shadow: 0 0 0 3px #8574ed18;
+        }
+
+        .input-wrap span {
+            color: #9589e9;
+            font-size: 17px;
+        }
+
+        input {
+            border: 0;
+            outline: none;
+            background: transparent;
+            padding: 13px 0;
+            min-width: 0;
+            width: 100%;
+            color: var(--ink);
+            font-size: 14px;
+        }
+
+        .hint {
+            font-size: 10px;
+            color: #a0a1b7;
+            margin-top: 6px;
+        }
+
+        .location-card {
+            display: flex;
+            gap: 12px;
+            margin-top: 22px;
+            padding: 15px;
+            border-radius: 15px;
+            background: #f0fbf7;
+            border: 1px dashed #c3eadd;
+        }
+
+        .location-card .pin {
+            font-size: 23px;
+        }
+
+        .location-card strong {
+            font: 800 13px 'Nunito', sans-serif;
+        }
+
+        .location-card p {
+            margin: 4px 0 0;
+            color: #788d8a;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .predict-btn {
+            width: 100%;
+            border: 0;
+            color: white;
+            background: var(--purple);
+            padding: 16px;
+            border-radius: 14px;
+            font-weight: 800;
+            margin-top: 24px;
+            box-shadow: 0 7px 18px #8574ed35;
+            transition: transform .2s, background .2s;
+        }
+
+        .predict-btn:hover {
+            background: #7160d9;
+            transform: translateY(-2px);
+        }
+
+        .result-paper {
+            background: #e8faf3;
+            border: 1px solid #d4f1e6;
+            border-radius: 23px;
+            padding: 25px;
+            min-height: 370px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-paper:before {
+            content: "♡";
+            position: absolute;
+            top: -30px;
+            right: 10px;
+            font-size: 140px;
+            color: #d5f2e7;
+            transform: rotate(15deg);
+        }
+
+        .result-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .result-label {
+            color: #528b7c;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .result-title {
+            font: 900 29px 'Nunito', sans-serif;
+            margin: 12px 0 4px;
+        }
+
+        .result-amount {
+            font: 900 clamp(30px, 4vw, 43px)/1.2 'Nunito', sans-serif;
+            letter-spacing: -1.8px;
+            overflow-wrap: anywhere;
+            margin: 18px 0 7px;
+        }
+
+        .result-caption {
+            color: #658e84;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .result-house {
+            background: #ffffffb8;
+            border-radius: 16px;
+            text-align: center;
+            padding: 15px;
+            font-size: 42px;
+            margin: 23px 0 15px;
+        }
+
+        .result-message {
+            background: #ffffffc9;
+            border-radius: 13px;
+            padding: 14px;
+            color: #5d8078;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .result-details {
+            margin-top: 15px;
+            padding-top: 14px;
+            border-top: 1px solid #cceade;
+            color: #63877f;
+            font-size: 11px;
+            line-height: 2;
+        }
+
+        .bottom {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            margin-top: 22px;
+        }
+
+        .mini-title {
+            font: 800 16px 'Nunito', sans-serif;
+            margin-bottom: 15px;
+        }
+
+        .metric-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .metric {
+            background: #f4f0ff;
+            padding: 14px;
+            border-radius: 13px;
+        }
+
+        .metric:nth-child(2) {
+            background: #e8f5ff;
+        }
+
+        .metric:nth-child(3) {
+            background: #e5f9f1;
+        }
+
+        .metric:nth-child(4) {
+            background: #fff3df;
+        }
+
+        .metric span {
+            display: block;
+            font-size: 10px;
+            color: var(--muted);
+        }
+
+        .metric strong {
+            display: block;
+            font: 900 19px 'Nunito', sans-serif;
+            margin-top: 7px;
+        }
+
+        .info-text {
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.9;
+        }
+
+        .status {
+            display: inline-block;
+            background: var(--mint);
+            color: #428a73;
+            padding: 7px 11px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 800;
+            margin-top: 7px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 35px 0 15px;
+            color: #a0a0b6;
+            font-size: 11px;
+        }
+
+        .error {
+            display: none;
+            color: #a93c58;
+            background: #fff0f2;
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 14px;
+            font-size: 12px;
+        }
+
+        @media (max-width: 760px) {
+
+            .hero,
+            .workspace,
+            .bottom {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                margin-bottom: 32px;
+            }
+
+            .hero {
+                gap: 25px;
+                margin-bottom: 30px;
+            }
+
+            .hero-art {
+                min-height: 260px;
+            }
+
+            h1 {
+                letter-spacing: -2px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .page {
+                padding: 17px 14px;
+            }
+
+            .fields {
+                grid-template-columns: 1fr;
+            }
+
+            .field.full {
+                grid-column: auto;
+            }
+
+            .nav-note {
+                font-size: 10px;
+            }
+
+            .paper {
+                padding: 19px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <nav>
+            <div class="brand">dreamhouse<span> ♡</span></div>
+            <div class="nav-note">A little ML magic ✦</div>
+        </nav>
+
+        <section class="hero">
+            <div>
+                <div class="eyebrow">✿ Your home, your story</div>
+                <h1>Every home<br>has a <em>little</em><br>story.</h1>
+                <p>
+                    Curious about a home's value? Let's explore it together.
+                    Add a few details and let machine learning help you
+                    discover an estimated value.
+                </p>
+            </div>
+
+            <div class="hero-art" aria-label="Cute house illustration">
+                <div class="sun"></div>
+                <span class="spark s1">✳</span>
+                <span class="spark s2">✦</span>
+                <span class="spark s3">♡</span>
+                <div class="house">
+                    <div class="roof"></div>
+                    <div class="window left"></div>
+                    <div class="window right"></div>
+                    <div class="door"></div>
+                </div>
+                <div class="art-caption">a place to call home ✿</div>
+            </div>
+        </section>
+
+        <section class="workspace">
+
+            <div class="paper">
+                <div class="section-top">
+                    <div>
+                        <h2>Let's meet your home</h2>
+                        <div class="sub">A few little details make a big difference.</div>
+                    </div>
+                    <div class="step">01</div>
+                </div>
+
+                <form id="houseForm">
+                    <div class="fields">
+
+                        <div class="field">
+                            <label for="MedInc">Median income</label>
+                            <div class="input-wrap">
+                                <span>$</span>
+                                <input id="MedInc" name="MedInc" type="number" min="0.1" max="20" step="any" value="5"
+                                    required>
+                            </div>
+                            <div class="hint">In units of $10,000</div>
+                        </div>
+
+                        <div class="field">
+                            <label for="HouseAge">House age</label>
+                            <div class="input-wrap">
+                                <span>⌂</span>
+                                <input id="HouseAge" name="HouseAge" type="number" min="1" max="52" step="any"
+                                    value="20" required>
+                            </div>
+                            <div class="hint">Median age, in years</div>
+                        </div>
+
+                        <div class="field">
+                            <label for="AveRooms">Average rooms</label>
+                            <div class="input-wrap">
+                                <span>▦</span>
+                                <input id="AveRooms" name="AveRooms" type="number" min="0.1" max="100" step="any"
+                                    value="5" required>
+                            </div>
+                            <div class="hint">Rooms per household</div>
+                        </div>
+
+                        <div class="field">
+                            <label for="AveBedrms">Average bedrooms</label>
+                            <div class="input-wrap">
+                                <span>♡</span>
+                                <input id="AveBedrms" name="AveBedrms" type="number" min="0.1" max="20" step="any"
+                                    value="1" required>
+                            </div>
+                            <div class="hint">Bedrooms per household</div>
+                        </div>
+
+                        <div class="field">
+                            <label for="Population">Area population</label>
+                            <div class="input-wrap">
+                                <span>♧</span>
+                                <input id="Population" name="Population" type="number" min="1" max="50000" step="any"
+                                    value="1000" required>
+                            </div>
+                            <div class="hint">People in the census area</div>
+                        </div>
+
+                        <div class="field">
+                            <label for="AveOccup">Average occupancy</label>
+                            <div class="input-wrap">
+                                <span>⌂</span>
+                                <input id="AveOccup" name="AveOccup" type="number" min="0.1" max="100" step="any"
+                                    value="3" required>
+                            </div>
+                            <div class="hint">People per household</div>
+                        </div>
+
+                        <div class="field">
+                            <label for="Latitude">Latitude</label>
+                            <div class="input-wrap">
+                                <span>↟</span>
+                                <input id="Latitude" name="Latitude" type="number" min="32" max="42" step="any"
+                                    value="34.05" required>
+                            </div>
+                            <div class="hint">California dataset: 32–42</div>
+                        </div>
+
+                        <div class="field">
+                            <label for="Longitude">Longitude</label>
+                            <div class="input-wrap">
+                                <span>↔</span>
+                                <input id="Longitude" name="Longitude" type="number" min="-125" max="-114" step="any"
+                                    value="-118.25" required>
+                            </div>
+                            <div class="hint">California dataset: -125 to -114</div>
+                        </div>
+
+                    </div>
+
+                    <div class="location-card">
+                        <div class="pin">🌿</div>
+                        <div>
+                            <strong>A note about location</strong>
+                            <p>This model uses California census-area data.
+                                Use coordinates and features that match your dataset.</p>
+                        </div>
+                    </div>
+
+                    <div id="error" class="error" role="alert"></div>
+
+                    <button class="predict-btn" type="submit">
+                        Discover estimated value ✨ →
+                    </button>
+                </form>
+            </div>
+
+            <div class="result-paper">
+                <div class="result-content">
+                    <div class="result-label">✿ your little valuation</div>
+                    <div class="result-title">A home full of possibilities</div>
+
+                    <div class="result-house">🏡</div>
+
+                    <div id="resultAmount" class="result-amount">Your estimate awaits</div>
+                    <div id="resultCaption" class="result-caption">
+                        Fill in your home's details and let your trained
+                        model calculate an estimate.
+                    </div>
+
+                    <div class="result-message" id="resultMessage">
+                        ♡ This is an educational estimate of an area's
+                        median home value, not a professional appraisal.
+                    </div>
+
+                    <div class="result-details" id="resultDetails">
+                        <div>✦ Model · Linear Regression</div>
+                        <div>✦ Dataset · Housing data you trained on</div>
+                        <div>✦ Output · Median value estimate</div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="bottom">
+            <div class="paper">
+                <div class="mini-title">A little model notebook ✎</div>
+                <div class="metric-row">
+                    <div class="metric">
+                        <span>MSE</span>
+                        <strong id="mse">—</strong>
+                    </div>
+                    <div class="metric">
+                        <span>RMSE</span>
+                        <strong id="rmse">—</strong>
+                    </div>
+                    <div class="metric">
+                        <span>MAE</span>
+                        <strong id="mae">—</strong>
+                    </div>
+                    <div class="metric">
+                        <span>R² score</span>
+                        <strong id="r2">—</strong>
+                    </div>
+                </div>
+                <div class="sub" style="margin-top:15px">
+                    Connect your trained model's evaluation metrics here.
+                </div>
+            </div>
+
+            <div class="paper">
+                <div class="mini-title">Made with curiosity ♡</div>
+                <div class="info-text">
+                    A machine-learning project that turns housing
+                    features into an estimated value. Built with
+                    thoughtful preprocessing, regression and
+                    real dataset exploration.
+                </div>
+                <div class="status">✿ LEARNING IN PROGRESS</div>
+            </div>
+        </section>
+
+        <footer>
+            dreamhouse atelier · a tiny ML project made with ♡
+        </footer>
+    </div>
+
+    <script>
+        const form = document.getElementById("houseForm");
+        const errorBox = document.getElementById("error");
+        const amount = document.getElementById("resultAmount");
+        const caption = document.getElementById("resultCaption");
+        const message = document.getElementById("resultMessage");
+
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+            errorBox.style.display = "none";
+
+            if (!form.reportValidity()) return;
+
+            const data = Object.fromEntries(new FormData(form).entries());
+
+            for (const key in data) {
+                data[key] = Number(data[key]);
+
+                if (!Number.isFinite(data[key])) {
+                    showError("Please enter valid numbers in every field.");
+                    return;
+                }
+            }
+
+            const button = form.querySelector("button");
+            button.disabled = true;
+            button.textContent = "A little moment of magic…";
+
+            try {
+                // Expected backend endpoint:
+                // POST /predict
+                // JSON body: the eight feature values above.
+                // Expected response: {"prediction": 2.75}
+                // Prediction is in units of $100,000 for California Housing.
+                const response = await fetch("/predict", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    throw new Error("The prediction server returned an error.");
+                }
+
+                const result = await response.json();
+
+                if (typeof result.prediction !== "number" ||
+                    !Number.isFinite(result.prediction)) {
+                    throw new Error("The server response is missing a valid prediction.");
+                }
+
+                const dollars = Math.max(0, result.prediction) * 100000;
+
+                amount.textContent = dollars.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                    maximumFractionDigits: 0
+                });
+
+                caption.textContent = "Your model's estimated area median value.";
+                message.textContent =
+                    "♡ Prediction generated by your trained model. " +
+                    "Actual property prices can vary by condition, location and market.";
+                document.getElementById("resultDetails").innerHTML =
+                    "<div>✦ Model · Connected successfully</div>" +
+                    "<div>✦ Result · Real model prediction</div>";
+
+            } catch (err) {
+                showError(
+                    "Couldn't connect to /predict. Add a prediction endpoint " +
+                    "to your backend, then try again. No fake prediction was shown."
+                );
+            } finally {
+                button.disabled = false;
+                button.textContent = "Discover estimated value ✨ →";
+            }
+        });
+
+        function showError(text) {
+            errorBox.textContent = text;
+            errorBox.style.display = "block";
+        }
+    </script>
+</body>
+
+</html>
